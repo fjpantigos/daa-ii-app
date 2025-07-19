@@ -1,0 +1,56 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h4 class="text-center mb-4">Iniciar sesión</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      
+      <!-- Correo -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-envelope-fill"></i>
+          </span>
+          <input type="email" class="form-control" id="email" placeholder="usuario@correo.com" formControlName="email">
+        </div>
+
+        @if (email?.invalid && email?.touched) {
+          <div class="text-danger">
+            @if (email?.errors?.['required']) {
+              <small>El correo es obligatorio.</small>
+            }
+            @if (email?.errors?.['email']) {
+              <small>Formato de correo inválido.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Contraseña -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-lock-fill"></i>
+          </span>
+          <input type="password" class="form-control" id="password" placeholder="********" formControlName="password">
+        </div>
+
+        @if (password?.invalid && password?.touched) {
+          <div class="text-danger">
+            @if (password?.errors?.['required']) {
+              <small>La contraseña es obligatoria.</small>
+            }
+            @if (password?.errors?.['minlength']) {
+              <small>Debe tener al menos 6 caracteres.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Botón -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Ingresar</button>
+      </div>
+    </form>
+  </div>
+</div>
