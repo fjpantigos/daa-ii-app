@@ -1,0 +1,15 @@
+@for $i from 1 through 10 {
+    tr:nth-child(#{$i}) {
+      @if $i % 2 == 0 {
+        background-color: #f8f9fa;
+      } @else {
+        background-color: #ffffff;
+      }
+    }
+  }
+  
+  // Botones pequeños con bordes redondeados
+  button.btn-sm {
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+  }
