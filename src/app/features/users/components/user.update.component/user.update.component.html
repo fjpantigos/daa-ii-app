@@ -1,0 +1,78 @@
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card w-100" style="max-width: 700px;">
+      <div class="card-header">
+        <h5 class="mb-0 text-center">Modificar Usuario</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+          <div class="row g-3">
+            <!-- Nombres -->
+            <div class="col-md-6">
+              <label class="form-label">Nombres</label>
+              <input type="text" class="form-control" formControlName="name">
+              @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                <div class="text-danger small" >
+                    El nombre es obligatorio.
+                </div>
+              }
+            </div>
+                
+            <!-- Apellidos -->
+            <div class="col-md-6">
+              <label class="form-label">Apellidos</label>
+              <input type="text" class="form-control" formControlName="lastName">
+              @if (form.get('lastName')?.invalid && form.get('lastName')?.touched) {
+                <div class="text-danger small">
+                    El apellido es obligatorio.
+                </div>
+              }
+            </div>
+  
+            <!-- Correo -->
+            <div class="col-md-6">
+              <label class="form-label">Correo</label>
+              <input type="email" class="form-control" formControlName="email">
+              @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                <div class="text-danger small">
+                    @if (form.get('email')?.errors?.['required']) {
+                        <span >El correo es obligatorio.</span>
+                    }
+                    @if (form.get('email')?.errors?.['email']) {
+                        <span>El correo no es válido.</span>
+                    }                                    
+                  </div>
+              }
+            </div>
+  
+            <!-- Rol -->
+            <div class="col-md-6">
+              <label class="form-label">Rol</label>
+              <select class="form-select" formControlName="role">
+                <option value="">Seleccione</option>
+                <option value="admin">Administrador</option>
+                <option value="user">Usuario</option>
+              </select>
+              @if (form.get('role')?.invalid && form.get('role')?.touched) {
+                <div class="text-danger small" >
+                    El rol es obligatorio.
+                  </div>
+              }
+            </div>
+  
+          </div>
+  
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
+          </div>
+        </form>
+        @if(loading) {
+            <div class="loading-overlay">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Registrando...</span>
+                </div>
+            </div>            
+        }
+      </div>
+    </div>
+  </div>

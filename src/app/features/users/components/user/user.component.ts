@@ -14,13 +14,16 @@ import { NgClass } from '@angular/common';
 export class UserComponent {
   private userService = inject(UserService);
   private router = inject(Router);
-  private toastr = inject(ToastrService);  
+  private toastr = inject(ToastrService);
+  loading = false;
 
   users = signal<User[]>([]);
 
   async ngOnInit() {
+    this.loading = true;
     const usuarios = await this.userService.getAll();
     this.users.set(usuarios);
+    this.loading = false;
   }
 
   addUser() {
