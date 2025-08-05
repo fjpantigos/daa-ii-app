@@ -11,12 +11,10 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideRouter(routes),
     provideFirebaseApp(() =>
       initializeApp({
 
@@ -24,7 +22,11 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),    
+    provideRouter(routes),
     provideAnimations(),
     provideToastr(),
+    provideHttpClient(),
   ],
 };
