@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Lista de Estudiantes</h2>
-    <button class="btn btn-primary">Agregar</button>
+    <button class="btn btn-primary" (click)="addStudent()">Agregar</button>
   </div>
 
     <table class="table table-striped table-bordered">
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (student of students; let i = $index; track student.uid) {
+      @for (student of students(); let i = $index; track student.uid) {
       <tr>
         <td>{{ i + 1 }}</td>
         <td>{{ student.name }}</td>

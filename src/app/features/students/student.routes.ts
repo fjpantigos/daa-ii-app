@@ -11,5 +11,10 @@ export const STUDENT_ROUTES: Routes = [
         path: 'list', 
         loadComponent: () => import('./components/student.component/student.component').then(m => m.StudentComponent),
         canActivate: [AuthGuard] 
-    },        
+    },  
+    {
+        path: 'add',
+        loadComponent: () => import('./components/student.add.component/student.add.component').then(m => m.StudentAddComponent),
+        canActivate: [AuthGuard]
+    }      
 ]

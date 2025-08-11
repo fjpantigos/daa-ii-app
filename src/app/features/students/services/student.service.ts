@@ -19,4 +19,21 @@ export class StudentService {
     return this.http.get<StudentInterface>(`${this.apiUrl}${id}`);
   }
 
+  createStudent(student: StudentInterface): Observable<StudentInterface> {
+    student.uid = crypto.randomUUID();
+    student.active = 1;
+    return this.http.post<StudentInterface>(this.apiUrl, student, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  updateStudent(id: string, student: StudentInterface): Observable<StudentInterface> {
+    return this.http.put<StudentInterface>(`${this.apiUrl}/${id}`, student, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  deleteStudent(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }  
 }
