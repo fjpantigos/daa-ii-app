@@ -17,7 +17,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideFirebaseApp(() =>
       initializeApp({
-
+        apiKey: 'AIzaSyDadvQ0cid_SLnJ3OHZPIiEAu4Hk2HZe8Y',
+        authDomain: 'da-ii-2025-d67aa.firebaseapp.com',
+        projectId: 'da-ii-2025-d67aa',
+        storageBucket: 'da-ii-2025-d67aa.firebasestorage.app',
+        messagingSenderId: '985041714446',
+        appId: '1:985041714446:web:f1de6239fa12f857a86b5f',
       })
     ),
     provideAuth(() => getAuth()),

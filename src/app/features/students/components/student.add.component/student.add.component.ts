@@ -18,6 +18,8 @@ import { StudentService } from '../../services/student.service';
 export class StudentAddComponent {
   form!: FormGroup;
   loading = false;
+  photoUrl: string | null = null; // Previsualización
+  selectedFile: File | null = null; // Archivo seleccionado  
 
   constructor(
     private fb: FormBuilder,
@@ -34,11 +36,33 @@ export class StudentAddComponent {
     });
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.photoUrl = reader.result as string;
+      };
+      reader.readAsDataURL(this.selectedFile);
+
+      // Subir la imagen al servidor
+      this.uploadPhoto(this.selectedFile);
+    }
+  }  
+
+  uploadPhoto(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+  }
+
   async save() {
     this.loading = true;
     this.form.disable();  
     const student = this.form.value;  
-    
+
     this.studentService.createStudent(student).subscribe({
       next: () => {
         this.toastr.success('Estudiante registrado correctamente');
