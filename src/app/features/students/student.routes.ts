@@ -16,5 +16,10 @@ export const STUDENT_ROUTES: Routes = [
         path: 'add',
         loadComponent: () => import('./components/student.add.component/student.add.component').then(m => m.StudentAddComponent),
         canActivate: [AuthGuard]
-    }      
+    },
+    {
+        path: 'update/:uid',
+        loadComponent: () => import('./components/student.update.component/student.update.component').then(m => m.StudentUpdateComponent),
+        canActivate: [AuthGuard]
+    }        
 ]

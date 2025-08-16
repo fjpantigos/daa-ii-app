@@ -35,4 +35,8 @@ export class StudentComponent {
   addStudent() {
     this.router.navigate(['student/add']);
   }
+
+  editStudent(uid:string){
+    this.router.navigate([`student/update/${uid}`]); 
+  }
 }

@@ -7,7 +7,7 @@ import { StudentInterface } from '../interfaces/student.interface';
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl = 'http://localhost:8081/api/v1/instituto/student/';
+  private apiUrl = 'http://localhost:8080/api/v1/instituto/student/';
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +28,8 @@ export class StudentService {
   }
   
   updateStudent(id: string, student: StudentInterface): Observable<StudentInterface> {
+    student.uid = id;
+    student.active = 1;
     return this.http.put<StudentInterface>(`${this.apiUrl}/${id}`, student, {
       headers: { 'Content-Type': 'application/json' }
     });

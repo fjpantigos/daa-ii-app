@@ -35,14 +35,15 @@ export class StudentUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.loadData();
   }
 
   async loadData() {
     this.loading = true;
 
     this.studentService.getStudentById(this.studentId).subscribe({
-      next: () => {
+      next: (student) => {
+        this.student = student;
         this.form.patchValue({
           documentNumber: this.student?.documentNumber,
           name: this.student?.name,
@@ -55,6 +56,28 @@ export class StudentUpdateComponent implements OnInit {
         console.error('Error al cargar alumno:', error);
       },
       complete: () => {
+        this.loading = false;
+      }
+    });   
+  }
+
+  async save() {
+    this.loading = true;
+    this.form.disable();  
+    const student = this.form.value;  
+
+    this.studentService.updateStudent(this.studentId, student).subscribe({
+      next: () => {
+        this.toastr.success('Estudiante modificado correctamente');
+        this.router.navigate(['student/list']);
+      },
+      error: (error) => {
+        console.error('Error al modificar estudiante:', error);
+        const backendMessage = error?.error?.message || 'Error al modificar estudiante';
+        this.toastr.error(backendMessage);
+      },
+      complete: () => {
+        this.form.enable();
         this.loading = false;
       }
     });   

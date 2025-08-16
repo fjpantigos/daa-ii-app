@@ -22,7 +22,7 @@
         <td>{{ student.lastName }}</td>
         <td>{{ student.email }}</td>
         <td class="text-nowrap">
-          <button class="btn btn-sm btn-info me-2">
+          <button class="btn btn-sm btn-info me-2" (click)="editStudent(student.uid)">
             Editar
           </button>
           <button class="btn btn-sm btn-danger me-2">
